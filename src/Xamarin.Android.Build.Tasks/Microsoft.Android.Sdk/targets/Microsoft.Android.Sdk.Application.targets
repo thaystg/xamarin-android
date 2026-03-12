@@ -118,6 +118,16 @@ This file contains targets specific for Android application projects.
     </PropertyGroup>
   </Target>
 
+  <PropertyGroup Condition=" '$(AndroidAttachDebugger)' == 'true' and '$(UseMonoRuntime)' != 'true' and '$(MicrosoftDiagnosticsCoreclrRemoteDebuggerVersion)' == '' ">
+    <MicrosoftDiagnosticsCoreclrRemoteDebuggerVersion>10.0.0-preview.26159.3</MicrosoftDiagnosticsCoreclrRemoteDebuggerVersion>
+  </PropertyGroup>
+   <ItemGroup Condition=" '$(UseMonoRuntime)' != 'true' and '$(AndroidAttachDebugger)' == 'true' ">
+     <_DebuggerRuntimeIdentifiers Include="$(RuntimeIdentifiers)" />
+     <PackageReference
+         Include="@(_DebuggerRuntimeIdentifiers->'Microsoft.Diagnostics.RemoteMscordbiTarget.%(Identity)')"
+         Version="$(MicrosoftDiagnosticsCoreclrRemoteDebuggerVersion)" />
+   </ItemGroup>
+
   <Target Name="Run" DependsOnTargets="$(_RunDependsOn)" />
 
   <PropertyGroup>
