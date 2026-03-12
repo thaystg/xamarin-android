@@ -157,8 +157,6 @@
   <!-- Trimmer switches that default to OFF in Release mode -->
   <PropertyGroup Condition=" '$(AndroidApplication)' == 'true' and '$(Optimize)' == 'true' ">
     <DebuggerSupport Condition=" '$(DebuggerSupport)' == '' ">false</DebuggerSupport>
-    <!-- CoreCLR debugger uses gRPC which requires network access -->
-    <AndroidNeedsInternetPermission Condition=" '$(UseMonoRuntime)' != 'true' and '$(AndroidAttachDebugger)' == 'true' ">True</AndroidNeedsInternetPermission>    
     <!-- Used for Hot Reload -->
     <StartupHookSupport Condition=" '$(StartupHookSupport)' == '' ">false</StartupHookSupport>
     <HttpActivityPropagationSupport Condition=" '$(HttpActivityPropagationSupport)' == '' ">false</HttpActivityPropagationSupport>
